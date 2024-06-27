@@ -7,6 +7,23 @@ void UserInput(char* str, int size) {
     cin.getline(str, size);
 }
 
+bool Correct(const char* str) {
+    int ident = 0;
+
+    for (int i = 0;str[i] != '\0';i++) {
+        if (str[i] == '(') {
+            ident++;
+        }
+        else if (str[i] == ')') {
+            ident--;
+            if (ident < 0) {
+                return false;
+            }
+        }
+    }
+    return ident == 0;
+}
+
 int main() {
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
@@ -15,4 +32,10 @@ int main() {
     char user[Size];
     UserInput(user, Size);
 
+    if (Correct(user)) {
+        cout << "Дужки розміщені коректно" << endl;
+    }
+    else {
+        cout << "Дужки розміщені не коректно" << endl;
+    }
 }
